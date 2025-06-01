@@ -12,6 +12,10 @@
 
 ## Installation
 
+```shell
+pip install aws-ou-membership
+```
+
 ## Usage
 
 ```python
