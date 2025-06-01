@@ -1,0 +1,90 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aws-ou-membership"
+dynamic = ["version"]
+description = "Determine whether an AWS account is in a given set of OUs or their descendants."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+keywords = []
+authors = [
+  { name = "Neil Smith", email = "neil@nsmith.net" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Operating System :: OS Independent",
+]
+dependencies = [
+  "boto3>=1.38",
+  "cachetools>=6.0",
+  "mypy-boto3-sts>=1.38",
+  "mypy-boto3-organizations>=1.38"
+]
+
+[project.urls]
+Homepage = "https://github.com/nsmithuk/aws-ou-membership"
+Issues = "https://github.com/nsmithuk/aws-ou-membership/issues"
+
+[tool.hatch.version]
+path = "src/aws_ou_membership/__about__.py"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/tests",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/aws_ou_membership"]
+
+
+[tool.hatch.envs.dev]
+dependencies = [
+  "ruff",
+  "pytest",
+  "pytest-mock",
+]
+[tool.hatch.envs.dev.scripts]
+fmt = [
+  "ruff check --select I --fix .",
+  "ruff format ."
+]
+listbuild = [
+  "tar -tzf dist/*.tar.gz",
+  "unzip -l dist/*.whl"
+]
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/aws_ou_membership tests}"
+
+[tool.coverage.run]
+source_pkgs = ["aws_ou_membership", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/aws_ou_membership/__about__.py",
+]
+
+[tool.coverage.paths]
+aws_ou_membership = ["src/aws_ou_membership", "*/aws-ou-membership/src/aws_ou_membership"]
+tests = ["tests", "*/aws-ou-membership/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
