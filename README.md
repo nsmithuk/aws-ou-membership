@@ -1,6 +1,6 @@
 # AWS Account OU Membership
 
-**Checks whether an AWS account belongs to a specific set of OUs - or their descendants - within an AWS Organization.**
+**Checks whether an AWS account sits within a set of OUs - or their descendants - within an AWS Organization.**
 
 `aws_ou_membership` is a lightweight Python library that determines if a given AWS account resides within a target Organizational Unit (OU) or one of its ancestors. It uses the AWS Organizations API and supports caching for performance.
 
@@ -26,6 +26,8 @@ print(result)  # True or False
 ```
 
 ## Custom Client Provider (Assume Role)
+
+The `organizations:ListParents` action must be called from a principal within the AWS Organization's management account. It's common therefore assume a role into the management account to use this tool.
 
 ```python
 from aws_ou_membership import OUMembershipChecker, AssumeRoleClientProvider
