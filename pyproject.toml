@@ -40,7 +40,9 @@ path = "src/aws_ou_membership/__about__.py"
 
 [tool.hatch.build.targets.sdist]
 exclude = [
+  "/dist",
   "/tests",
+  "/.github",
 ]
 
 [tool.hatch.build.targets.wheel]
