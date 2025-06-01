@@ -20,8 +20,12 @@ from aws_ou_membership import OUMembershipChecker, DefaultSessionClientProvider
 # Create the checker
 checker = OUMembershipChecker(DefaultSessionClientProvider())
 
-# Check if an account is in a specific OU or its ancestors
-result = checker.is_in_any_ou_or_descendant(account_id="123456789012", target_haystack={"ou-abcd-efgh"})
+# Check if an account is in either of the passed OU IDs.
+result = checker.is_in_any_ou_or_descendant(
+    account_id="123456789012", 
+    target_haystack={"ou-abcd-efgh", "ou-ijkl-mnop"}
+)
+
 print(result)  # True or False
 ```
 
