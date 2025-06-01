@@ -25,10 +25,10 @@ classifiers = [
   "Operating System :: OS Independent",
 ]
 dependencies = [
-  "boto3>=1.38",
-  "cachetools>=6.0",
-  "mypy-boto3-sts>=1.38",
-  "mypy-boto3-organizations>=1.38"
+  "boto3>=1.38,<2.0",
+  "cachetools>=6.0,<7.0",
+  "mypy-boto3-sts>=1.38,<2.0",
+  "mypy-boto3-organizations>=1.38,<2.0"
 ]
 
 [project.urls]

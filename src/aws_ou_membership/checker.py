@@ -41,7 +41,6 @@ class OUMembershipChecker:
             ValueError: If the child has no parent or multiple parents
         """
         if child_id in self._cache:
-            print("cache hit")
             return self._cache[child_id]
 
         response = self._org_client_provider.get_client().list_parents(ChildId=child_id)
